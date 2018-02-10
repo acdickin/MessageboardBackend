@@ -1,6 +1,6 @@
 {
 	"name": "Messageboard API",
 	"description":"API made in Node, express and mongodb",
-	"repository":"https://github.com/acdickin/MessageboardAPIBuild",
+	"repository":"https://github.com/acdickin/MessageboardBackend",
 	"keywords":["node","express","mongodb"]
 }

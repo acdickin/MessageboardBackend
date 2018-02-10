@@ -20,7 +20,9 @@ mongoose.set('debug', true)
 
 
 //middleware
-const PORT = 63145;
+const port = process.env.PORT || 63145;
+app.use(express.static(__dirname))
+
 app.use(headers)
 
 app.use(bodyParser.json());
