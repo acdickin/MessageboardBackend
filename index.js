@@ -35,9 +35,9 @@ MessageRoutes(app)
 UserRoutes(app)
 
 app.get('/',(req,res)=>{
-	res.send(`node and express server is running on port ${PORT}`)
+	res.send(`node and express server is running on port ${port}`)
 })
 
-app.listen(PORT,()=>{
-	console.log(`Your server is running on port ${PORT}`)
+app.listen(port,()=>{
+	console.log(`Your server is running on port ${port}`)
 });
