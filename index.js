@@ -1,43 +1,60 @@
 'use strict';
-import express from 'express'
-var app =express();
 
-import MessageRoutes from './routes/MessageRoutes'
-import UserRoutes from './routes/UserRoutes'
+var _express = require('express');
 
-import bodyParser from 'body-parser'
+var _express2 = _interopRequireDefault(_express);
 
-import config from './config'
-import headers from './middleware/header'
-import mongoose from 'mongoose'
+var _MessageRoutes = require('./routes/MessageRoutes');
 
+var _MessageRoutes2 = _interopRequireDefault(_MessageRoutes);
 
-var db =config.config.db
-console.log(db)
-mongoose.connect(db);
-mongoose.set('debug', true)
+var _UserRoutes = require('./routes/UserRoutes');
 
+var _UserRoutes2 = _interopRequireDefault(_UserRoutes);
 
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
+var _header = require('./middleware/header');
+
+var _header2 = _interopRequireDefault(_header);
+
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var app = (0, _express2.default)();
+
+var db = _config2.default.config.db;
+console.log(db);
+_mongoose2.default.connect(db);
+_mongoose2.default.set('debug', true);
 
 //middleware
-const port = process.env.PORT || 63145;
-app.use(express.static(__dirname))
+var port = process.env.PORT || 63145;
+app.use(_express2.default.static(__dirname));
 
-app.use(headers)
+app.use(_header2.default);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
+app.use(_bodyParser2.default.json());
+app.use(_bodyParser2.default.urlencoded({
+	extended: true
 }));
 
+(0, _MessageRoutes2.default)(app);
+(0, _UserRoutes2.default)(app);
 
-MessageRoutes(app)
-UserRoutes(app)
+app.get('/', function (req, res) {
+	res.send('node and express server is running on port ' + port);
+});
 
-app.get('/',(req,res)=>{
-	res.send(`node and express server is running on port ${port}`)
-})
-
-app.listen(port,()=>{
-	console.log(`Your server is running on port ${port}`)
+app.listen(port, function () {
+	console.log('Your server is running on port ' + port);
 });

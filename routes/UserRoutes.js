@@ -1,30 +1,34 @@
-import { loginUser, createUser, authUser, updateUser, checkAuthenticated } from '../controllers/UserController';
-import express from 'express';
+'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
- const UserRoutes=(app)=>{
-	
-	app.route('/auth/login')
-		.post((req, res)=>{
-			console.log(req.body)
-			loginUser(req,res);
-		})
+var _UserController = require('../controllers/UserController');
 
-	
-	app.route('/auth/register')
-		.post((req, res)=>{
-			createUser(req, res);
-		})
+var _express = require('express');
 
-	app.route('/api/users/me')
-		.get(checkAuthenticated, (req,res)=>{
-			authUser(req,res);
-		})
+var _express2 = _interopRequireDefault(_express);
 
-	app.route('/api/users/me')
-		.post(checkAuthenticated, (req,res)=>{
-			updateUser(req, res);
-		})
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-}
-export default UserRoutes
+var UserRoutes = function UserRoutes(app) {
+
+	app.route('/auth/login').post(function (req, res) {
+		console.log(req.body);
+		(0, _UserController.loginUser)(req, res);
+	});
+
+	app.route('/auth/register').post(function (req, res) {
+		(0, _UserController.createUser)(req, res);
+	});
+
+	app.route('/api/users/me').get(_UserController.checkAuthenticated, function (req, res) {
+		(0, _UserController.authUser)(req, res);
+	});
+
+	app.route('/api/users/me').post(_UserController.checkAuthenticated, function (req, res) {
+		(0, _UserController.updateUser)(req, res);
+	});
+};
+exports.default = UserRoutes;
